@@ -1,0 +1,32 @@
+<!-- FORMULÁRIO -->
+<mat-card>
+    <mat-card-content>
+      <div class="containerX">
+        <div fxLayout="row" fxFlex class="form-card">
+          <div fxFlex>
+            <h6>Ainda não possui cadatro?</h6>
+            <button mat-flat-button class="w5">Cadastre-se</button>
+            <mat-divider></mat-divider>
+
+            <form [formGroup]="loginForm">
+              <p>
+                <mat-form-field appearance="outline" class='w8'>
+                  <mat-label>E-mail</mat-label>
+                  <input matInput name="email" formControlName="email">
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline" class='w8'>
+                  <mat-label>Senha</mat-label>
+                  <input matInput [type]="hide? 'password' : 'text'" name="password" formControlName="password">
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+              </p>
+              <button mat-flat-button class="w5" (click)="loginUser()">Entrar</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>

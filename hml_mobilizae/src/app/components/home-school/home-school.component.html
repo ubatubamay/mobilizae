@@ -1,0 +1,236 @@
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Requisições">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuário </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="progress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Campanha </th>
+            <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Contribuição </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+          </ng-container>
+
+          <!-- Color Column -->
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Resposta </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+  </mat-tab>
+
+  <mat-tab label="Minhas campanhas">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Campanha </th>
+          <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de criação </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> % atingido </th>
+          <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</mat-tab>
+
+  <!-- ADICIONAR CAMPANHA -->
+    <mat-tab label="Adicionar campanha">
+      <!-- <div class="example-large-box mat-elevation-z4"> -->
+        <!-- FORMULÁRIO -->
+        <mat-card>
+            <mat-card-content>
+              <div class="containerX">
+                <div fxLayout="row" fxFlex class="form-card">
+                  <mat-card fxFlex>
+                    <form [formGroup]="formNovaCampanha" novalidate (ngSubmit)="save(formNovaCampanha.value, formNovaCampanha.valid, $event)">
+
+                      <mat-radio-group formControlName="tipo">
+                        <mat-radio-button required class="example-radio-button" *ngFor="let tipoCampanha of tiposCampanha" [value]="tipoCampanha">
+                          {{tipoCampanha}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Título da campanha</mat-label>
+                        <input required matInput formControlName="titulo">
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Resumo</mat-label>
+                        <input matInput formControlName="resumo">
+                        <mat-hint>Opcional</mat-hint>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Sobre a campanha</mat-label>
+                        <textarea required matInput formControlName="sobre"></textarea>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" *ngIf="formNovaCampanha.controls.tipo.value == 'Voluntariado' || formNovaCampanha.controls.tipo.value == 'Material e Voluntariado'">
+                        <mat-label>Datas e horários da prestação de voluntariado</mat-label>
+                        <textarea required matInput formControlName="dataHora"></textarea>
+                      </mat-form-field>
+
+                      <!-- INÍCIO TABELA MATERIAIS -->
+                      <mat-card formArrayName="materiais" *ngIf="formNovaCampanha.controls.tipo.value == 'Material' || formNovaCampanha.controls.tipo.value == 'Material e Voluntariado'">
+                        <mat-card-subtitle>Materiais</mat-card-subtitle>
+                        <mat-divider></mat-divider>
+
+                        <div *ngFor="let material of formNovaCampanha.controls.materiais.controls; let i=index">
+                          <mat-divider *ngIf="formNovaCampanha.controls.materiais.controls.length > 1 && i > 0" ></mat-divider><br>
+
+                          <div [formGroupName]="i">
+                            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left">
+
+                              <mat-form-field  fxFlex="10%" fxFlex.xs="20">
+                                <input matInput placeholder="Quantidade" type="number" formControlName="qtd" required>
+                              </mat-form-field>
+
+                              <mat-form-field  fxFlex="20%">
+                                <input matInput placeholder="Tipo de material" formControlName="tipoMaterial" required>
+                                <mat-error *ngIf="material.controls.tipoMaterial.invalid">
+                                    O tipo de material é obrigatório.
+                                </mat-error>
+                              </mat-form-field>
+
+                              <div fxLayout.xs="row">
+                                <button type="button" mat-mini-fab color="warn" fxFlex="nogrow" *ngIf="formNovaCampanha.controls.materiais.controls.length > 1" (click)="removeMaterial(i)">
+                                  <mat-icon>delete forever</mat-icon>
+                                </button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <mat-card-actions>
+                          <button type="button" mat-raised-button color="primary" (click)="addMaterial()">
+                            <mat-icon>add box</mat-icon>
+                            Adicionar material
+                          </button>
+                        </mat-card-actions>
+                      </mat-card>
+                      <!-- FIM TABELA materiais -->
+
+                      <!-- INÍCIO TABELA VAGAS -->
+                      <mat-card formArrayName="vagas" *ngIf="formNovaCampanha.controls.tipo.value == 'Voluntariado' || formNovaCampanha.controls.tipo.value == 'Material e Voluntariado'">
+                        <mat-card-subtitle>Vaga</mat-card-subtitle>
+                        <mat-divider></mat-divider>
+
+                        <div *ngFor="let vaga of formNovaCampanha.controls.vagas.controls; let i=index">
+                          <mat-divider *ngIf="formNovaCampanha.controls.vagas.controls.length > 1 && i > 0" ></mat-divider><br>
+
+                          <div [formGroupName]="i">
+                            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left">
+
+                              <mat-form-field  fxFlex="10%" fxFlex.xs="20">
+                                <input matInput placeholder="Quantidade" type="number" formControlName="qtd" required>
+                              </mat-form-field>
+
+                              <mat-form-field  fxFlex="20%">
+                                <input matInput placeholder="Nome da vaga" formControlName="nomeVaga" required>
+                                <mat-error *ngIf="vaga.controls.nomeVaga.invalid">
+                                    O nome da vaga é obrigatório.
+                                </mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field  fxFlex="30%"  fxFlex.xs="grow">
+                                <input matInput placeholder="Descrição" formControlName="descVaga" required>
+                              </mat-form-field>
+
+                              <div fxLayout.xs="row">
+                                <button type="button" mat-mini-fab color="warn" fxFlex="nogrow" *ngIf="formNovaCampanha.controls.vagas.controls.length > 1" (click)="removeUnit(i)">
+                                  <mat-icon>delete forever</mat-icon>
+                                </button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <mat-card-actions>
+                          <button type="button" mat-raised-button color="primary" (click)="addUnit()">
+                            <mat-icon>add box</mat-icon>
+                            Adicionar vaga
+                          </button>
+                        </mat-card-actions>
+                      </mat-card>
+                      <!-- FIM TABELA VAGAS -->
+
+                      <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+                      <button mat-flat-button
+                        (click)="uploader.uploadAll()"
+                        [disabled]="!uploader.getNotUploadedItems().length" >
+                          Anexar imagem
+                      </button>
+
+                      <button mat-flat-button>
+                        Solicitar cadastro
+                      </button>
+                      <br/>
+                    </form>
+                  </mat-card>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+      <!-- </div> -->
+    </mat-tab>
+
+  <!-- PERFIL -->
+  <mat-tab label="Perfil">
+    <div class="example-large-box mat-elevation-z4">
+      Large content
+    </div>
+  </mat-tab>
+</mat-tab-group>

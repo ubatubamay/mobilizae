@@ -1,0 +1,21 @@
+.w8{
+  width: 80%;
+}
+
+.w5{
+  width: 50%;
+}
+
+.card-deck{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+mat-divider{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

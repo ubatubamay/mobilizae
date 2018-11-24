@@ -1,0 +1,73 @@
+<!-- FORMULÁRIO -->
+<mat-card>
+  <mat-card-content>
+    <div class="containerX">
+      <div fxLayout="row" fxFlex class="form-card">
+        <!-- <div
+          fxFlex
+          class="fxClass-all"
+          ngClass.xs="fxClass-xs"
+          [ngClass.sm]="{'fxClass-sm': hasStyle}"
+          [ngClass.md]="{'fxClass-md': hasStyle, 'fxClass-md2': hasStyle}"
+          [ngClass.lg]="['fxClass-lg', 'fxClass-lg2']"> -->
+
+        <div fxFlex>
+          <button mat-flat-button class="w5">Sign-in with Google</button>
+          <mat-divider></mat-divider>
+          <form method="POST">
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>Nome</mat-label>
+                <input matInput [(ngModel)]="user.nome" name="nome">
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>CPF</mat-label>
+                <input matInput [(ngModel)]="user.cpf" name="cpf">
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>Data de Nascimento</mat-label>
+                <input matInput [(ngModel)]="user.dataNasc" name="dataNasc">
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>UF</mat-label>
+                <input matInput [(ngModel)]="user.uf" name="uf">
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>Cidade</mat-label>
+                <input matInput [(ngModel)]="user.cidade" name="cidade">
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>E-mail</mat-label>
+                <input matInput [(ngModel)]="user.email" name="email">
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field appearance="outline" class='w8'>
+                <mat-label>Senha</mat-label>
+                <input matInput [(ngModel)]="user.password" name="password">
+              </mat-form-field>
+            </p>
+
+            <button mat-flat-button class="w5" (click)="registerUser()">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

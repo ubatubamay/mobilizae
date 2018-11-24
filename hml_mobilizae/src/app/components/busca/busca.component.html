@@ -1,0 +1,61 @@
+<mat-card class="search-form">
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Escola</mat-label>
+      <input type="text" placeholder="Escola" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <section class="example-section">
+      <mat-checkbox class="example-margin">Campanha</mat-checkbox>
+      <mat-checkbox class="example-margin">Vaga</mat-checkbox>
+    </section>
+
+    <mat-form-field appearance="outline">
+      <mat-select placeholder="Estado" [(value)]="selectedUF">
+        <mat-option *ngFor="let estado of estados" [value]='estado.value'>
+          {{estado.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-select placeholder="Cidade" [(value)]="selectedCidade">
+        <mat-option *ngFor="let cidade of cidades" [value]='cidade.value'>
+          {{cidade.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button>Buscar</button>
+  </form>
+</mat-card>
+
+<!-- ########################################################################### -->
+
+<div class="container">
+  <div class="card-deck">
+    <mat-card class="result-card" *ngFor="let campanha of campanhas">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Escola</mat-card-title>
+        <mat-card-subtitle>Cidade/UF</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Escola">
+      <mat-card-content>
+        <h6>{{campanha.titulo}}</h6>
+        <p>
+          {{campanha.sobre}}
+        </p>
+        <mat-icon *ngIf="campanha.tipo == 'Material' || campanha.tipo == 'Material e Voluntariado'">card_giftcard</mat-icon>
+        <mat-icon *ngIf="campanha.tipo == 'Voluntariado' || campanha.tipo == 'Material e Voluntariado'">person</mat-icon>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="getCampanha(campanha)">VER CAMPANHA</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

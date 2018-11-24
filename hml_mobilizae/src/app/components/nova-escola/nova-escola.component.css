@@ -1,0 +1,26 @@
+.banner-card{
+  height: 400px;
+  background: linear-gradient( rgba(0,0,0,.3),rgba(0,0,0,.3)),
+              url('../../../assets/img/banner10.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: absolute;
+}
+
+.banner-card mat-card-content {
+  margin-bottom: 24px;
+}
+
+.banner-card mat-card-footer {
+  left: 24px;
+  margin-bottom: 24px;
+}
+
+.form-card{
+  height: 100%;
+  box-sizing: content-box !important;
+}
+
+.example-radio-button{
+  margin-right: 10px;
+}

@@ -1,0 +1,38 @@
+<!-- <app-main-nav></app-main-nav> -->
+<div style="height: 100vh;">
+
+  <mat-toolbar color="primary">
+    <a [routerLink]="'/'">
+      <span><img src="../assets/img/logo-mobilizae-semFundo2.png"></span>
+    </a>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+      <a [routerLink]="'/como-funciona'" routerLinkActive="active" mat-button>Como funciona</a>
+      <a [routerLink]="'/busca'" routerLinkActive="active" mat-button>Campanhas e vagas</a>
+      <a [routerLink]="'/sou-uma-escola'" routerLinkActive="active" mat-button>Sou uma Escola</a>
+      <a (click)="openDialogSignIn()" *ngIf="!islog" mat-button>Cadastrar-se</a>
+      <a (click)="openDialogLogIn()" *ngIf="!islog" mat-button>Entrar</a>
+      <a (click)="logout()" *ngIf="islog" mat-button>Sair</a>
+    </div>
+    <div fxShow="true" fxHide.gt-sm="true">
+      <a href="#" (click)="sidenav.toggle()" mat-button><mat-icon>menu</mat-icon></a>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav #sidenav fxLayout="column">
+      <div fxLayout="column">
+        <a [routerLink]="'/como-funciona'" routerLinkActive="active" mat-button>Como funciona</a>
+        <a [routerLink]="'/campanhas-vagas'" routerLinkActive="active" mat-button>Campanhas e vagas</a>
+        <a [routerLink]="'/sou-uma-escola'" routerLinkActive="active" mat-button>Sou uma Escola</a>
+        <a (click)="openDialogSignIn()" *ngIf="!islog" mat-button>Cadastrar-se</a>
+        <a (click)="openDialogLogIn()" *ngIf="!islog" mat-button>Entrar</a>
+        <a (click)="logout()" *ngIf="islog" mat-button>Sair</a>
+        <a (click)="sidenav.toggle()" mat-button><mat-icon>close</mat-icon></a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill><router-outlet></router-outlet></mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

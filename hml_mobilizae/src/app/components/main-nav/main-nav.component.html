@@ -1,0 +1,36 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Sobre</a>
+      <a mat-list-item href="#">Como funciona</a>
+      <a mat-list-item href="#">Cadastrar escola</a>
+      <a mat-list-item href="#">Entrar</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="(isHandset$ | async)">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span><img src="../assets/img/logo-mobilizae-semFundo2.png"></span>
+      <span class="spacer"></span>
+      <a *ngIf="!(isHandset$ | async)" href="#">Sobre</a>
+      <a *ngIf="!(isHandset$ | async)" href="#">Como funciona</a>
+      <a *ngIf="!(isHandset$ | async)" href="#">Cadastrar escola</a>
+      <a *ngIf="!(isHandset$ | async)" href="#">Entrar</a>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
