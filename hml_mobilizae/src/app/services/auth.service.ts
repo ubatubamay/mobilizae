@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuarios';
+import { isNullOrUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +54,15 @@ export class AuthService {
 
   setToken(token): void {
     localStorage.setItem('accessToken', token);
+  }
+
+  getCurrentUser(): Usuario {
+    const user_string = localStorage.getItem('currentUser');
+    if (!isNullOrUndefined(user_string)) {
+      const user: Usuario = JSON.parse(user_string);
+      return user;
+    } else {
+      return null;
+    }
   }
 }
