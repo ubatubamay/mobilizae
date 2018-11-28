@@ -13,4 +13,9 @@ router.delete('/:id', user.deleteUser);
 router.post('/register', user.registerUser);
 router.post('/login', handleAuthentication);
 
+router.post('/logout', function(req, res){
+    req.logOut();
+    res.redirect("/");
+});
+
 module.exports = router;

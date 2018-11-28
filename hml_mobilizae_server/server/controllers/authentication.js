@@ -29,10 +29,13 @@ handleAuthentication = (req, res) => {
                             }
                     );
                     return res.status(200).json({
-                        message: "Autenticado com sucesso.",                        
-                        name: user[0].name,
-                        email: user[0].email,
-                        token: token
+                        message: "Autenticado com sucesso.",
+                        user: {
+                            name: user[0].name,
+                            userId: user[0]._id,
+                            token: token
+                        }                        
+                        
                     });
                 }
                 return res.status(401).send("Senha icorreta.");                

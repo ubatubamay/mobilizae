@@ -38,6 +38,5 @@ export class AppComponent {
 
   logout () {
     this._auth.logoutUser();
-    location.reload();
   }
 }
