@@ -11,7 +11,6 @@ import 'rxjs/add/operator/map';
 export class AjudasService {
 
   ajudaSelecionada: Ajudas;
-  ajudas: Ajudas[];
   readonly URL_API = 'http://localhost:3000/api/ajudas';
   constructor(private http: HttpClient,
               private loginService: LoginService) {

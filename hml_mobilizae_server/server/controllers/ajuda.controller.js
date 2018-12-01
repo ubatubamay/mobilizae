@@ -2,7 +2,7 @@ const Ajuda = require ('../models/ajudas');
 const ajudaCtrl = {};
 
 ajudaCtrl.getAjudas = async (req, res) => {
-    const ajudas = await Ajuda.find();
+    const ajudas = await Ajuda.find().populate('campanha').populate('usuario');
     res.json(ajudas);
 }
 

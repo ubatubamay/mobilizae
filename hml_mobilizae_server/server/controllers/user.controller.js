@@ -91,6 +91,8 @@ userCtrl.registerUser = (req, res) => {
         console.log(user);
         user = new User(user);
         user.save((err, registred) => {
+            if(err) return console.log(err);
+            console.log(registred);
             var token = jwt.sign({
                 email: user.email,
                 password: user.password

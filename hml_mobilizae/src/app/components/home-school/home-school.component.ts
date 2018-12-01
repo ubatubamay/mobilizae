@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/models/usuarios';
+import { Ajudas } from 'src/app/models/ajudas';
+import { AjudasService } from 'src/app/services/ajudas.service';
 
 export interface UserData {
   id: string;
@@ -48,6 +50,7 @@ const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
 export class HomeSchoolComponent implements OnInit {
 
   usuario: Usuario;
+  ajudas: Ajudas[];
 
   //  -------------------- MINHAS CAMPANHAS ---------------------
   displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
@@ -136,7 +139,8 @@ export class HomeSchoolComponent implements OnInit {
   constructor(public campanhaService: CampanhasService,
     private _router: Router,
     private _fb: FormBuilder,
-    private _auth: AuthService) {
+    private _auth: AuthService,
+    private ajudaService: AjudasService) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
@@ -147,6 +151,10 @@ export class HomeSchoolComponent implements OnInit {
   ngOnInit() {
 
     this.usuario = this._auth.getCurrentUser();
+    this.ajudaService.getAjudas().subscribe(ajudas => {
+      this.ajudas = ajudas;
+      console.log(this.ajudas);
+    }, error => console.log(error));
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
