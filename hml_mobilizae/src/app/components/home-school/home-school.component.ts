@@ -153,7 +153,6 @@ export class HomeSchoolComponent implements OnInit {
     this.usuario = this._auth.getCurrentUser();
     this.ajudaService.getAjudas().subscribe(ajudas => {
       this.ajudas = ajudas;
-      console.log(this.ajudas);
     }, error => console.log(error));
 
     this.dataSource.paginator = this.paginator;
