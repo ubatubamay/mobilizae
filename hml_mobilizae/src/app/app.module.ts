@@ -14,7 +14,6 @@ import { FileSelectDirective } from 'ng2-file-upload';
 
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SchoolRegisterComponent } from './components/school-register/school-register.component';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BuscaComponent } from './components/busca/busca.component';
 
@@ -33,7 +32,6 @@ import { ConfirmaAjudaVagaComponent } from './components/campanha/confirma-ajuda
     AppComponent,
     NavigationComponent,
     SchoolRegisterComponent,
-    MainNavComponent,
     HomePageComponent,
     BuscaComponent,
     NovaEscolaComponent,
