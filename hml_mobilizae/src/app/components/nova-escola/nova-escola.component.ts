@@ -3,6 +3,8 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -24,6 +26,9 @@ export interface Cidade {
 export class NovaEscolaComponent implements OnInit {
 
   title = 'app';
+  school = {
+    role: 'escola'
+  };
 
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
 
@@ -45,12 +50,11 @@ export class NovaEscolaComponent implements OnInit {
     {value: 'poa', viewValue: 'Porto Alegre'}
   ];
 
-  constructor() { }
+  constructor(private _auth: AuthService,
+    private _router: Router) { }
 
-  favoriteSeason: string;
-  seasons: string[] = ['Municipal', 'Estadual', 'Federal'];
 
-  nivelEducacional: string;
+  governos: string[] = ['Municipal', 'Estadual', 'Federal'];
   niveis: string[] = ['Infantil', 'Fundamental', 'Médio', 'Técnico', 'Superior'];
 
   ngOnInit() {
@@ -64,6 +68,17 @@ export class NovaEscolaComponent implements OnInit {
          console.log('ImageUpload:uploaded:', item, status, response);
          alert('File uploaded successfully');
      };
+  }
+
+  registerUser() {
+    this._auth.registraUsuario(this.school)
+      .subscribe(
+        res => {
+          console.log(res);
+          this._router.navigate(['/como-funciona']);
+        },
+        err => console.log(err)
+      );
   }
 
   private _filter(value: string): string[] {

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class CadastrarSeComponent implements OnInit {
 
   user = {
+    role: 'cidadao'
   };
 
   constructor(public thisDiologRef: MatDialogRef<CadastrarSeComponent>,

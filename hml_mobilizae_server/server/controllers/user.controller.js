@@ -68,6 +68,7 @@ userCtrl.registerUser = (req, res) => {
     var saltRounds = 10;
     bcrypt.hash(req.body.password, saltRounds, function(err, hash){
         var user = {
+            role: req.body.role,
             email: req.body.email,
             password:hash,
             name: req.body.nome,

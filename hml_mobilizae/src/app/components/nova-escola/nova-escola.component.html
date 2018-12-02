@@ -29,108 +29,115 @@
             <h3>Formulário de cadastro</h3>
 
             <h4>Perfil da escola</h4>
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Nome da escola</mat-label>
-                <input matInput>
-              </mat-form-field>
-            </p>
-
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Slogan</mat-label>
-                <input matInput>
-                <mat-hint>Opcional</mat-hint>
-              </mat-form-field>
-            </p>
-
-            <p>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
-                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-                  {{season}}
-                </mat-radio-button>
-              </mat-radio-group>
-            </p>
-
-            <p>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="nivelEducacional">
-                <mat-radio-button class="example-radio-button" *ngFor="let nivel of niveis" [value]="nivel">
-                  {{nivel}}
-                </mat-radio-button>
-              </mat-radio-group>
-            </p>
-            <div class="example-selected-value">Nível educacional: {{nivelEducacional}}</div>
-
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Descrição/História</mat-label>
-                <textarea matInput></textarea>
-              </mat-form-field>
-            </p>
-
-            <h4>Contato</h4>
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>E-mail da escola</mat-label>
-                <input matInput placeholder="Ex.: escola@gmail.com">
-              </mat-form-field>
-            </p>
-
-            <h4>Endereço</h4>
-
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Logradouro</mat-label>
-                <input matInput>
-                <mat-hint>Rua, Avenida, etc...</mat-hint>
-              </mat-form-field>
-            </p>
-
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Nº</mat-label>
-                <input matInput>
-              </mat-form-field>
-            </p>
-
-            <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Bairro</mat-label>
-                <input matInput>
-              </mat-form-field>
-            </p>
-
-            <p>
-              <mat-form-field appearance="outline">
-                  <mat-select placeholder="Estado" [(value)]="selectedUF">
-                    <mat-option *ngFor="let estado of estados" [value]='estado.value'>
-                      {{estado.viewValue}}
-                    </mat-option>
-                  </mat-select>
+            <form method="POST">
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nome da escola</mat-label>
+                  <input matInput [(ngModel)]="school.nome" name="nome">
                 </mat-form-field>
-            </p>
+              </p>
 
-            <p>
-              <mat-form-field appearance="outline">
-                  <mat-select placeholder="Cidade" [(value)]="selectedCidade">
-                    <mat-option *ngFor="let cidade of cidades" [value]='cidade.value'>
-                      {{cidade.viewValue}}
-                    </mat-option>
-                  </mat-select>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Slogan</mat-label>
+                  <input matInput [(ngModel)]="school.slogan" name="slogan">
+                  <mat-hint>Opcional</mat-hint>
                 </mat-form-field>
-            </p>
+              </p>
 
-            <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
-            <button mat-flat-button
-              (click)="uploader.uploadAll()"
-              [disabled]="!uploader.getNotUploadedItems().length" >
-                  Upload an Image
-            </button>
+              <p>
+                <mat-radio-group class="example-radio-group" [(ngModel)]="school.governo" name="governo">
+                  <mat-radio-button class="example-radio-button" *ngFor="let governo of governos" [value]="governo">
+                    {{governo}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </p>
 
-            <button mat-flat-button>
-                  Solicitar cadastro
-            </button>
+              <p>
+                <mat-radio-group class="example-radio-group" [(ngModel)]="school.nivel" name="nivel">
+                  <mat-radio-button class="example-radio-button" *ngFor="let nivel of niveis" [value]="nivel">
+                    {{nivel}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </p>
 
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Descrição/História</mat-label>
+                  <textarea matInput [(ngModel)]="school.descricao" name="descricao"></textarea>
+                </mat-form-field>
+              </p>
+
+              <h4>Contato</h4>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>E-mail da escola</mat-label>
+                  <input matInput [(ngModel)]="school.email" name="email" placeholder="Ex.: escola@gmail.com">
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline" class='w8'>
+                  <mat-label>Senha</mat-label>
+                  <input matInput [(ngModel)]="school.password" name="password">
+                </mat-form-field>
+              </p>
+
+              <h4>Endereço</h4>
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Logradouro</mat-label>
+                  <input matInput [(ngModel)]="school.logradouro" name="logradouro">
+                  <mat-hint>Rua, Avenida, etc...</mat-hint>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nº</mat-label>
+                  <input matInput [(ngModel)]="school.numero" name="numero">
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Bairro</mat-label>
+                  <input matInput [(ngModel)]="school.bairro" name="bairro">
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                    <mat-select placeholder="Estado" [(value)]="selectedUF" [(ngModel)]="school.uf" name="uf">
+                      <mat-option *ngFor="let estado of estados" [value]='estado.value'>
+                        {{estado.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                    <mat-select placeholder="Cidade" [(value)]="selectedCidade" [(ngModel)]="school.cidade" name="cidade">
+                      <mat-option *ngFor="let cidade of cidades" [value]='cidade.value'>
+                        {{cidade.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </p>
+
+              <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+              <button mat-flat-button
+                (click)="uploader.uploadAll()"
+                [disabled]="!uploader.getNotUploadedItems().length" >
+                    Upload an Image
+              </button>
+
+              <button mat-flat-button (click)="registerUser()">
+                    Solicitar cadastro
+              </button>
+            </form>
             <br/>
           </mat-card>
         </div>
