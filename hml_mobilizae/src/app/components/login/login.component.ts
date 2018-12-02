@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { Usuario } from '../../models/usuarios';
-// TESTE
-import { LoginService } from '../../services/login.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -15,16 +15,14 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   hide = true;
-  loginUserData = {};
   loginForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     public thisDiologRef: MatDialogRef<LoginComponent>,
     private _auth: AuthService,
-    private _router: Router,
-    private loginService: LoginService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -41,38 +39,17 @@ export class LoginComponent implements OnInit {
     this.thisDiologRef.close('Cancel');
   }
 
-  // loginUser () {
-  //   this._auth.loginUser(this.loginUserData)
-  //   .subscribe(
-  //     res => {
-  //       localStorage.setItem('token', res.token);
-  //       console.log(res);
-  //       console.log(res.html);
-  //       console.log(res.token);
-  //       this._router.navigate(['/como-funciona']);
-  //       this.onCloseCancel();
-  //     },
-  //     err => alert('Login Inválido')
-  //   );
-  // }
-
-  loginUser () {
-    this.loginService.login(this.loginForm.value)
-                      .subscribe(usuario => console.log('Bem vindo(a) ' + usuario.name),
-                      response => console.log(response.error.message)
-    );
-  }
-
   onLogin () {
     return this._auth.loginUser(this.loginForm.value)
-                      .subscribe(
-                        data => {
-                          this._auth.setUser(data.user);
-                          this._auth.setToken(data.user.token);
-                          this.router.navigate(['/como-funciona']);
-                          this.onCloseCancel();
-                        },
-                        error => console.log(error)
+      .subscribe(
+        data => {
+          this._auth.setUser(data.user);
+          this._auth.setToken(data.user.token);
+          this.onCloseCancel();
+          location.reload();
+          this.router.navigate(['/como-funciona']);
+        },
+        error => console.log(error)
     );
   }
 

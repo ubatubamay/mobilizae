@@ -38,5 +38,7 @@ export class AppComponent {
 
   logout () {
     this._auth.logoutUser();
+    this._router.navigate(['/']);
+    location.reload();
   }
 }
