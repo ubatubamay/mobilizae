@@ -5,7 +5,7 @@ export class Ajudas {
   campanha: any;
   tipo: string;
   vaga?: string;
-  material?: MateriaisAjudas;
+  material?: string;
   status?: string;
   usuario?: string;
   _dataRequisicao: string;

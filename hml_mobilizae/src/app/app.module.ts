@@ -26,6 +26,7 @@ import { HomeSchoolComponent } from './components/home-school/home-school.compon
 import { SchoolCampaingsTableComponent } from './components/school-campaings-table/school-campaings-table.component';
 import { CampanhaComponent } from './components/campanha/campanha.component';
 import { ConfirmaAjudaVagaComponent } from './components/campanha/confirma-ajuda-vaga/confirma-ajuda-vaga.component';
+import { ConfirmaAjudaMaterialComponent } from './components/campanha/confirma-ajuda-material/confirma-ajuda-material.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ConfirmaAjudaVagaComponent } from './components/campanha/confirma-ajuda
     HomeSchoolComponent,
     SchoolCampaingsTableComponent,
     CampanhaComponent,
-    ConfirmaAjudaVagaComponent
+    ConfirmaAjudaVagaComponent,
+    ConfirmaAjudaMaterialComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { ConfirmaAjudaVagaComponent } from './components/campanha/confirma-ajuda
   entryComponents: [
     CadastrarSeComponent,
     LoginComponent,
-    ConfirmaAjudaVagaComponent
+    ConfirmaAjudaVagaComponent,
+    ConfirmaAjudaMaterialComponent
   ],
   providers: [AcoesService, CurrencyPipe, LoginService],
   bootstrap: [AppComponent]

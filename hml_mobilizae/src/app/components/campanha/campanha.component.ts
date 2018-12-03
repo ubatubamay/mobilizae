@@ -5,6 +5,8 @@ import { Vagas } from '../../models/vagas';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ConfirmaAjudaVagaComponent } from './confirma-ajuda-vaga/confirma-ajuda-vaga.component';
+import { Materiais } from 'src/app/models/materiais';
+import { ConfirmaAjudaMaterialComponent } from './confirma-ajuda-material/confirma-ajuda-material.component';
 
 @Component({
   selector: 'app-campanha',
@@ -27,6 +29,13 @@ export class CampanhaComponent implements OnInit {
   openDialogAjudarVaga(campanha: Campanhas, vaga: Vagas) {
     const dialogRef = this.dialog.open(ConfirmaAjudaVagaComponent, {
       data: {campanha: campanha, vaga: vaga},
+      width: '600px'
+    });
+  }
+
+  openDialogAjudarMaterial(campanha: Campanhas, material: Materiais) {
+    const dialogRef = this.dialog.open(ConfirmaAjudaMaterialComponent, {
+      data: {campanha: campanha, material: material},
       width: '600px'
     });
   }

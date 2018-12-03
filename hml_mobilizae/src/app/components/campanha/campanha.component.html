@@ -30,5 +30,28 @@
           </tbody>
         </table>
     </div>
+
+
+
+    <div *ngIf="campanha?.tipo == 'Material' || campanha?.tipo == 'Material e Voluntariado'">
+      <h2>Materiais</h2>
+      <table class="striped">
+          <thead>
+            <th>Quantidade</th>
+            <th>Item</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let material of campanha?.materiais">
+              <td>{{material.qtd}}</td>
+              <td>{{material.tipoMaterial}}</td>
+              <td>
+                <a>
+                  <button (click)="openDialogAjudarMaterial(campanha, material)" mat-raised-button color="primary">Quero ajudar</button>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
   </mat-card>
 </p>
