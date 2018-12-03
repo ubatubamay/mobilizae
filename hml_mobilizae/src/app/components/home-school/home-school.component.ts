@@ -128,6 +128,7 @@ export class HomeSchoolComponent implements OnInit {
    * Save form data
    */
   save(model: any, isValid: boolean, e: any) {
+    model.escola = this.usuario.userId;
     e.preventDefault();
     alert('Form data are: ' + JSON.stringify(model));
     this.campanhaService.postCampanha(model)
@@ -151,7 +152,7 @@ export class HomeSchoolComponent implements OnInit {
   ngOnInit() {
 
     this.usuario = this._auth.getCurrentUser();
-    this.ajudaService.getAjudas().subscribe(ajudas => {
+    this.ajudaService.getRequisicoesAjudaEscola(this.usuario.userId).subscribe(ajudas => {
       this.ajudas = ajudas;
     }, error => console.log(error));
 

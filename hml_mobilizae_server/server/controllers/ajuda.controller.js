@@ -23,4 +23,19 @@ ajudaCtrl.getAjuda = async (req, res) => {
     res.json(ajuda);
 }
 
+ajudaCtrl.getAjudaPorTipo = async (req, res) => {
+    const escola = req.params.id;
+    await Ajuda.find({status: 'Aguardando confirmação'})
+        .populate('campanha').populate('usuario').exec(function(err, ajudas) {
+            if (err) throw err;
+            var result = [];
+            ajudas.forEach(function(ajuda) {
+                if (ajuda.campanha.escola == escola){
+                    result.push(ajuda);
+                }
+            });
+        res.json(result);
+    });
+}
+
 module.exports = ajudaCtrl;

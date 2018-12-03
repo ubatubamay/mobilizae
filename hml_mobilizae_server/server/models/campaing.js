@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CampaingSchema = new Schema({
+    escola: { type: Schema.Types.ObjectId, ref: 'User' },
     tipo: { type: String},
     titulo: { type: String},
     resumo: { type: String },

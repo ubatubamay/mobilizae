@@ -25,6 +25,11 @@ export class AjudasService {
     return this.http.get<any>(this.URL_API + `/${id}`);
   }
 
+  getRequisicoesAjudaEscola(id: string) {
+    return this.http.get<any>(this.URL_API + `/filter/requisicao/escola/${id}`);
+  }
+
+
   postAjuda(ajuda: Ajudas): Observable<string> {
     let headers = new HttpHeaders();
     if (this.loginService.isLoggedIn()) {
