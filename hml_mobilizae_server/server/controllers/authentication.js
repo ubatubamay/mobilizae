@@ -33,6 +33,7 @@ handleAuthentication = (req, res) => {
                         user: {
                             name: user[0].name,
                             userId: user[0]._id,
+                            role: user[0].role,
                             token: token
                         }                        
                         

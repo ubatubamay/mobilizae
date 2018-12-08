@@ -27,6 +27,7 @@ import { SchoolCampaingsTableComponent } from './components/school-campaings-tab
 import { CampanhaComponent } from './components/campanha/campanha.component';
 import { ConfirmaAjudaVagaComponent } from './components/campanha/confirma-ajuda-vaga/confirma-ajuda-vaga.component';
 import { ConfirmaAjudaMaterialComponent } from './components/campanha/confirma-ajuda-material/confirma-ajuda-material.component';
+import { AreaCidadaoComponent } from './components/area-cidadao/area-cidadao.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ConfirmaAjudaMaterialComponent } from './components/campanha/confirma-a
     SchoolCampaingsTableComponent,
     CampanhaComponent,
     ConfirmaAjudaVagaComponent,
-    ConfirmaAjudaMaterialComponent
+    ConfirmaAjudaMaterialComponent,
+    AreaCidadaoComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { ConfirmaAjudaMaterialComponent } from './components/campanha/confirma-a
       {path: 'sou-uma-escola', component: NovaEscolaComponent},
       {path: 'como-funciona', component: HomeSchoolComponent},
       {path: 'campanha/:id', component: CampanhaComponent},
+      {path: 'area-cidadao', component: AreaCidadaoComponent},
       {path: 'tabela-campanhas-escola', component: SchoolCampaingsTableComponent, outlet: 'sidebar'}
     ])
   ],

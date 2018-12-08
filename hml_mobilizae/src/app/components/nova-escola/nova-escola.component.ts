@@ -75,7 +75,7 @@ export class NovaEscolaComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-          this._router.navigate(['/como-funciona']);
+          this._router.navigate(['/']);
         },
         err => console.log(err)
       );

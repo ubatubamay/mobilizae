@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 export class AppComponent {
   title = 'mobilizae';
   islog = this._auth.getToken();
+  user = this._auth.getCurrentUser();
 
   constructor(public dialog: MatDialog,
     private _auth: AuthService,

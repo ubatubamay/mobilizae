@@ -47,7 +47,11 @@ export class LoginComponent implements OnInit {
           this._auth.setToken(data.user.token);
           this.onCloseCancel();
           location.reload();
-          this.router.navigate(['/como-funciona']);
+          if (data.user.role === 'escola') {
+            this.router.navigate(['/como-funciona']);
+          } else {
+            this.router.navigate(['/area-cidadao']);
+          }
         },
         error => console.log(error)
     );
